@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Paiement;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Silber\Bouncer\BouncerFacade as Bouncer;
 
 class PaiementController extends Controller
 {
@@ -13,7 +15,13 @@ class PaiementController extends Controller
      */
     public function index()
     {
-        $paiements = Paiement::where('user_id', auth()->id())->get();
+        if (Bouncer::is(auth()->user())->an('admin')) {
+            // Les administrateurs voient tous les paiements
+            $paiements = Paiement::with('user')->get();
+        } else {
+            // Les utilisateurs voient uniquement leurs paiements
+            $paiements = auth()->user()->paiements;
+        }
 
         return view('paiements.index', compact('paiements'));
     }
@@ -38,11 +46,15 @@ class PaiementController extends Controller
             'amount' => 'required|numeric|min:0.01',
         ]);
 
-        $expiration = \Carbon\Carbon::createFromFormat('m/y', $request->card_expiration);
+        try {
+            $expiration = Carbon::createFromFormat('m/y', $request->card_expiration)->endOfMonth();
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['card_expiration' => 'Le format de la date est invalide.']);
+        }
 
 
-        if ($expiration->endOfMonth()->isPast()) {
-            echo "La carte est expirée.";
+        if ($expiration->isPast()) {
+            return redirect()->back()->withErrors(['card_expiration' => 'La carte est expirée.']);
         }
 
         $card_number = $request->input('card_number');
