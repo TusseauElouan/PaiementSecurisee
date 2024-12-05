@@ -6,6 +6,7 @@ use App\Models\Paiement;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Crypt;
 
 class PaiementSeeder extends Seeder
 {
@@ -21,7 +22,8 @@ class PaiementSeeder extends Seeder
             'montant' => 150.75,
             'carte_premiers_quatre' => '1234',
             'carte_derniers_quatre' => '5678',
-            'carte_date_expiration' => '2026-05-01',
+            'carte_date_expiration' => '25/12',
+            'carte_chiffree' => Crypt::encryptString('1234567890123456'),
             'transaction_id' => 'txn_'.uniqid(),
         ]);
     }
