@@ -22,7 +22,7 @@ class PaiementController extends Controller
      */
     public function create()
     {
-        return view('paiements.store');
+        return view('paiements.create');
     }
 
     /**

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Formulaire de Paiement</h1>
+    <h1>Ajouter un Paiement</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('paiements.create') }}">
+    <form method="POST" action="{{ route('paiements.store') }}">
         @csrf
         <div class="mb-3">
             <label for="card_number" class="form-label">Numéro de carte</label>
