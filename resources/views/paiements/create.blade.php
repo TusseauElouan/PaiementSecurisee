@@ -1,88 +1,60 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-lg">
-                <div class="card-header bg-primary text-white text-center">
-                    <h3>Ajouter un Paiement</h3>
-                    <p class="mb-0">Vos informations restent confidentielles et sécurisées.</p>
-                </div>
-                <div class="card-body">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul class="mb-0">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+<div class="flex justify-center items-center min-h-screen bg-gray-100 px-4">
+    <div class="w-full max-w-md p-6 bg-white border border-gray-200 rounded-lg shadow-lg">
+        <h4 class="text-center text-xl font-bold text-gray-800 mb-6">Ajouter un Paiement</h4>
 
-                    <form method="POST" action="{{ route('paiements.store') }}">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="card_number" class="form-label">
-                                <i class="bi bi-credit-card"></i> Numéro de carte
-                            </label>
-                            <input
-                                type="text"
-                                name="card_number"
-                                id="card_number"
-                                class="form-control"
-                                placeholder="1234 5678 9012 3456"
-                                required>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="card_expiration" class="form-label">
-                                    <i class="bi bi-calendar2-check"></i> Expiration (MM/YY)
-                                </label>
-                                <input
-                                    type="text"
-                                    name="card_expiration"
-                                    id="card_expiration"
-                                    class="form-control"
-                                    placeholder="MM/YY"
-                                    required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="card_cvv" class="form-label">
-                                    <i class="bi bi-lock-fill"></i> CVV
-                                </label>
-                                <input
-                                    type="password"
-                                    name="card_cvv"
-                                    id="card_cvv"
-                                    class="form-control"
-                                    placeholder="123"
-                                    required>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="amount" class="form-label">
-                                <i class="bi bi-currency-euro"></i> Montant (€)
-                            </label>
-                            <input
-                                type="number"
-                                name="amount"
-                                id="amount"
-                                class="form-control"
-                                placeholder="Entrez le montant"
-                                required>
-                        </div>
-                        <button type="submit" class="btn btn-success w-100">
-                            <i class="bi bi-shield-lock-fill"></i> Payer Maintenant
-                        </button>
-                    </form>
-                </div>
-                <div class="card-footer text-center text-muted">
-                    <small><i class="bi bi-lock-fill"></i> Paiement sécurisé par SSL</small>
-                </div>
+        @if ($errors->any())
+            <div class="mb-4 p-3 bg-red-50 border border-red-300 text-red-700 rounded">
+                <ul class="list-disc pl-5">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-        </div>
+        @endif
+
+        <form method="POST" action="{{ route('paiements.store') }}">
+            @csrf
+
+            <!-- Numéro de carte -->
+            <div class="mb-4">
+                <label for="card_number" class="block text-sm font-medium text-gray-700">Numéro de carte</label>
+                <input type="text" name="card_number" id="card_number"
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+                       placeholder="1234 5678 9012 3456" required>
+            </div>
+
+            <!-- Date d'expiration -->
+            <div class="mb-4">
+                <label for="card_expiration" class="block text-sm font-medium text-gray-700">Date d'expiration (MM/YY)</label>
+                <input type="text" name="card_expiration" id="card_expiration"
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+                       placeholder="MM/YY" required>
+            </div>
+
+            <!-- CVV -->
+            <div class="mb-4">
+                <label for="card_cvv" class="block text-sm font-medium text-gray-700">CVV</label>
+                <input type="password" name="card_cvv" id="card_cvv"
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+                       placeholder="123" required>
+            </div>
+
+            <!-- Montant -->
+            <div class="mb-4">
+                <label for="amount" class="block text-sm font-medium text-gray-700">Montant (€)</label>
+                <input type="number" name="amount" id="amount"
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+                       placeholder="0.00" required>
+            </div>
+
+            <!-- Bouton -->
+            <button type="submit" class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                Payer
+            </button>
+        </form>
     </div>
 </div>
 @endsection
-
