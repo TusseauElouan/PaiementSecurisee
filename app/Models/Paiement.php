@@ -26,4 +26,9 @@ class Paiement extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function remboursements()
+{
+    return $this->hasMany(Remboursement::class);
+}
+
 }
