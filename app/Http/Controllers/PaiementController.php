@@ -32,10 +32,17 @@ class PaiementController extends Controller
     {
         $request->validate([
             'card_number' => 'required|digits:16',
-            'card_expiration' => 'required|date_format:m/y',
+            'card_expiration' => 'required|regex:/^(0[1-9]|1[0-2])\/\d{2}$/',
             'card_cvv' => 'required|digits:3',
             'amount' => 'required|numeric|min:0.01',
         ]);
+
+        $expiration = \Carbon\Carbon::createFromFormat('m/y', $request->card_expiration);
+
+
+        if ($expiration->endOfMonth()->isPast()) {
+            echo "La carte est expirée.";
+        }
 
         $card_number = $request->input('card_number');
 
@@ -44,7 +51,7 @@ class PaiementController extends Controller
             'montant' => $request->input('amount'),
             'carte_premiers_quatre' => substr($card_number, 0, 4),
             'carte_derniers_quatre' => substr($card_number, -4),
-            'carte_date_expiration' => '20' . substr($request->input('card_expiration'), -2) . '-' . substr($request->input('card_expiration'), 0, 2) . '-01',
+            'carte_date_expiration' => $request->input('card_expiration'),
             'transaction_id' => 'txn_' . uniqid(),
         ]);
 

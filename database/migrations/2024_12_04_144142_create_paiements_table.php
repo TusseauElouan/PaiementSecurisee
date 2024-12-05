@@ -17,7 +17,7 @@ return new class extends Migration
             $table->decimal('montant', 10, 2);
             $table->string('carte_premiers_quatre', 4);
             $table->string('carte_derniers_quatre', 4);
-            $table->date('carte_date_expiration');
+            $table->string('carte_date_expiration', 5);
             $table->string('transaction_id')->unique();
             $table->timestamps();
         });
