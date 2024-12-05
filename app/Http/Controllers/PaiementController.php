@@ -56,9 +56,7 @@ class PaiementController extends Controller
      */
     public function show(Paiement $paiement)
     {
-        $paiement = Paiement::where('user_id', auth()->id())->findOrFail($id);
-
-        return view('paiements.show', compact('paiement'));
+        //
     }
 
     /**
@@ -83,11 +81,6 @@ class PaiementController extends Controller
     public function destroy(Paiement $paiement)
     {
         //
-    }
-
-    public function showForm()
-    {
-        return view('paiements.create');
     }
 
 }
