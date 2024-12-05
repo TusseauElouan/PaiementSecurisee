@@ -23,7 +23,7 @@
                 <label for="card_number" class="block text-sm font-medium text-gray-700">Numéro de carte</label>
                 <input type="text" name="card_number" id="card_number"
                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
-                       placeholder="1234 5678 9012 3456" required>
+                       placeholder="1234 5678 9012 3456" maxlength="16" required>
             </div>
 
             <!-- Date d'expiration -->
@@ -31,7 +31,7 @@
                 <label for="card_expiration" class="block text-sm font-medium text-gray-700">Date d'expiration (MM/YY)</label>
                 <input type="text" name="card_expiration" id="card_expiration"
                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
-                       placeholder="MM/YY" required>
+                       placeholder="MM/YY" maxlength="5" required>
             </div>
 
             <!-- CVV -->
@@ -39,7 +39,7 @@
                 <label for="card_cvv" class="block text-sm font-medium text-gray-700">CVV</label>
                 <input type="password" name="card_cvv" id="card_cvv"
                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
-                       placeholder="123" required>
+                       placeholder="123" maxlength="3" required>
             </div>
 
             <!-- Montant -->
@@ -47,7 +47,7 @@
                 <label for="amount" class="block text-sm font-medium text-gray-700">Montant (€)</label>
                 <input type="number" name="amount" id="amount"
                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
-                       placeholder="0.00" required>
+                       placeholder="0.00" min="0" required>
             </div>
 
             <!-- Bouton -->

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('carte_premiers_quatre', 4);
             $table->string('carte_derniers_quatre', 4);
             $table->string('carte_date_expiration', 5);
+            $table->text('carte_chiffree');
             $table->string('transaction_id')->unique();
             $table->timestamps();
         });
