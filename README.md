@@ -41,11 +41,7 @@ php artisan migrate
 ### Étape 5 : Seeder les données
 #### Ajouter les rôles et utilisateurs par défaut :
 ```bash
-php artisan db:seed --class=RoleAndUserSeeder
-```
-#### Ajouter des paiements de démonstration :
-```bash
-php artisan db:seed --class=PaiementSeeder
+php artisan db:seed
 ```
 
 ---
