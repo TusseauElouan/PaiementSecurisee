@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Paiement;
+use App\Models\Remboursement;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Silber\Bouncer\BouncerFacade as Bouncer;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class PaiementController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
@@ -104,6 +107,33 @@ class PaiementController extends Controller
     public function destroy(Paiement $paiement)
     {
         //
+    }
+
+    public function refundForm($id)
+    {
+        $paiement = Paiement::findOrFail($id);
+        $this->authorize('refund');
+
+        return view('paiements.refund', compact('paiement'));
+    }
+
+
+    public function processRefund(Request $request, $id)
+    {
+        $paiement = Paiement::findOrFail($id);
+        $this->authorize('refund');
+        $request->validate([
+            'montant' => 'required|numeric|min:0.01|max:' . $paiement->montant,
+        ]);
+
+        Remboursement::create([
+            'user_id' => auth()->user()->id,
+            'montant' => $request->montant,
+            'transaction_id' => uniqid('txn_'),
+        ]);
+
+
+        return redirect()->route('paiements.index')->with('success', 'Remboursement effectué avec succès.');
     }
 
 }

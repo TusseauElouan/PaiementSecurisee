@@ -17,6 +17,8 @@ class RoleAndUserSeeder extends Seeder
         Bouncer::create(['name' => 'admin', 'title'=> 'Administrateur']);
         Bouncer::create(['name'=> 'user', 'title'=> 'Utilisateur']);
 
+        Bouncer::allow('admin')->to(['view-paiements', 'refund']);
+
 
         $admin = User::firstOrCreate([
             'email' => 'admin@example.com',
