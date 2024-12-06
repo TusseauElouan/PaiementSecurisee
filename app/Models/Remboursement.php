@@ -19,4 +19,9 @@ class Remboursement extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function paiement()
+    {
+        return $this->belongsTo(Paiement::class, 'transaction_id', 'transaction_id');
+    }
 }

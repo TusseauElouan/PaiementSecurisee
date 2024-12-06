@@ -19,10 +19,8 @@ class PaiementController extends Controller
     public function index()
     {
         if (Bouncer::is(auth()->user())->an('admin')) {
-            // Les administrateurs voient tous les paiements
             $paiements = Paiement::with('user')->get();
         } else {
-            // Les utilisateurs voient uniquement leurs paiements
             $paiements = auth()->user()->paiements;
         }
 
@@ -113,8 +111,8 @@ class PaiementController extends Controller
     {
         $paiement = Paiement::findOrFail($id);
         $this->authorize('refund');
-
-        return view('paiements.refund', compact('paiement'));
+        $montantRestant = $paiement->montantRestant();
+        return view('paiements.refund', compact('paiement', 'montantRestant'));
     }
 
 
@@ -122,14 +120,15 @@ class PaiementController extends Controller
     {
         $paiement = Paiement::findOrFail($id);
         $this->authorize('refund');
+        $montantRestant = $paiement->montantRestant();
         $request->validate([
-            'montant' => 'required|numeric|min:0.01|max:' . $paiement->montant,
+            'montant' => "required|numeric|min:0.01|max:$montantRestant",
         ]);
 
         Remboursement::create([
             'user_id' => auth()->user()->id,
             'montant' => $request->montant,
-            'transaction_id' => uniqid('txn_'),
+            'transaction_id' => $paiement->transaction_id,
         ]);
 
 

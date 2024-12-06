@@ -18,7 +18,7 @@
         <tbody>
             @forelse ($paiements as $paiement)
                 <tr>
-                    <td>{{ number_format($paiement->amount, 2) }} €</td>
+                    <td>{{ number_format($paiement->montant, 2) }} €</td>
                     <td>{{ $paiement->created_at->format('d/m/Y H:i') }}</td>
                     <td>{{ substr($paiement->carte_premiers_quatre, 0, 4) }} **** **** {{ substr($paiement->carte_derniers_quatre, -4) }}</td>
                     @if(Bouncer::is(auth()->user())->an('admin'))

@@ -28,7 +28,13 @@ class Paiement extends Model
 
     public function remboursements()
 {
-    return $this->hasMany(Remboursement::class);
+    return $this->hasMany(Remboursement::class, 'transaction_id', 'transaction_id');
 }
+
+    public function montantRestant()
+    {
+        $remboursementsTotal = $this->remboursements->sum('montant');
+        return $this->montant - $remboursementsTotal;
+    }
 
 }

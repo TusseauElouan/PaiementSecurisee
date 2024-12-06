@@ -18,11 +18,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('paiements', PaiementController::class)->except(['show']);
-    Route::get('paiements/{id}/refund', [PaiementController::class, 'refundForm'])
-        ->middleware('can:refund');
+    // Route pour afficher le formulaire de remboursement
+Route::get('/paiements/{id}/refund', [PaiementController::class, 'refundForm'])->name('paiements.refund');
 
-    Route::post('paiements/{id}/refund', [PaiementController::class, 'processRefund'])
-        ->middleware('can:refund');
+// Route pour traiter la demande de remboursement
+Route::post('/paiements/{id}/refund', [PaiementController::class, 'processRefund'])->name('paiements.refund.process');
 });
 
 require __DIR__.'/auth.php';
