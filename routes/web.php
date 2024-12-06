@@ -5,9 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RemboursementController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -23,6 +21,10 @@ Route::get('/paiements/{id}/refund', [PaiementController::class, 'refundForm'])-
 
 // Route pour traiter la demande de remboursement
 Route::post('/paiements/{id}/refund', [PaiementController::class, 'processRefund'])->name('paiements.refund.process');
+
+Route::get('/', function () {
+    return view('dashboard');
+});
 });
 
 require __DIR__.'/auth.php';
