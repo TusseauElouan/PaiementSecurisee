@@ -17,10 +17,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('paiements', PaiementController::class)->except(['show']);
     // Route pour afficher le formulaire de remboursement
-Route::get('/paiements/{id}/refund', [PaiementController::class, 'refundForm'])->name('paiements.refund');
-
-// Route pour traiter la demande de remboursement
-Route::post('/paiements/{id}/refund', [PaiementController::class, 'processRefund'])->name('paiements.refund.process');
+    Route::get('/paiements/{uuid}/refund', [PaiementController::class, 'refundForm'])->name('paiements.refund.form');
+    Route::post('/paiements/{uuid}/refund', [PaiementController::class, 'processRefund'])->name('paiements.refund.process');
 
 Route::get('/', function () {
     return view('dashboard');

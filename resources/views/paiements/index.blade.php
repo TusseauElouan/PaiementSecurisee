@@ -40,7 +40,7 @@
                                 {{ $paiement->user->name }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                <a href="{{ url('paiements/' . $paiement->id . '/refund') }}"
+                                <a href="{{ url('paiements/' . $paiement->uuid . '/refund') }}"
                                     class="inline-block bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400">
                                     Rembourser
                                 </a>
