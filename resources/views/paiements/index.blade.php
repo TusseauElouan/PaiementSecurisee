@@ -27,7 +27,7 @@
                 @forelse ($paiements as $paiement)
                     <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            {{ number_format($paiement->amount, 2) }} €
+                            {{ number_format($paiement->montant, 2) }} €
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             {{ $paiement->created_at->format('d/m/Y H:i') }}
