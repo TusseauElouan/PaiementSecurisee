@@ -45,7 +45,7 @@ class PaiementController extends Controller
             'card_number' => 'required|digits:16',
             'card_expiration' => ['required', 'regex:/^(0[1-9]|1[0-2])\/\d{2}$/'],
             'card_cvv' => 'required|digits:3',
-            'amount' => 'required|numeric|min:0.01',
+            'amount' => 'required|numeric|min:0.01|max:999999999999.99',
         ]);
 
         try {

@@ -47,7 +47,7 @@
                 <label for="amount" class="block text-sm font-medium text-gray-700">Montant (€)</label>
                 <input type="number" name="amount" id="amount"
                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
-                       placeholder="0.00" step="0.01" value="{{old('amount')}}" required>
+                       placeholder="0.00" maxlength="15" step="0.01" value="{{old('amount')}}"  required>
             </div>
 
             <!-- Bouton -->

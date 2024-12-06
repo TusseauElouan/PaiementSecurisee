@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('paiements', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->decimal('montant', 10, 2);
+            $table->decimal('montant', 15, 2);
             $table->string('carte_premiers_quatre', 4);
             $table->string('carte_derniers_quatre', 4);
             $table->string('carte_date_expiration', 5);
