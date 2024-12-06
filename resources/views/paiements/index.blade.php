@@ -24,6 +24,11 @@
                     @if(Bouncer::is(auth()->user())->an('admin'))
                         <td>{{ $paiement->user->name }}</td>
                     @endif
+                    @if(Bouncer::is(auth()->user())->an('admin'))
+                        <td>
+                            <a href="{{ url('paiements/' . $paiement->id . '/refund') }}" class="btn btn-warning">Rembourser</a>
+                        </td>
+                    @endif
                 </tr>
             @empty
                 <tr>
