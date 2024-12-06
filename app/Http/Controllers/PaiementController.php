@@ -73,7 +73,7 @@ class PaiementController extends Controller
         $paiement->carte_chiffree = $encryptedCardNumber;
         $paiement->transaction_id = 'txn_' . uniqid();
         $paiement->uuid = Str::uuid()->toString();
-        $paiement->csv = $encryptedCVV;
+        $paiement->cvv = $encryptedCVV;
         $paiement->save();
 
         return redirect()->route('paiements.index')->with('message', 'Paiement ajouté avec succès.');
