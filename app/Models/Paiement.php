@@ -37,6 +37,12 @@ class Paiement extends Model
         $remboursementsTotal = $this->remboursements->sum('montant');
         return $this->montant - $remboursementsTotal;
     }
+
+    public function montantRemboursee()
+    {
+        return $this->remboursements->sum('montant');
+    }
+
     public static function boot()
     {
         parent::boot();

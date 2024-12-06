@@ -17,6 +17,7 @@
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Montant</th>
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Date</th>
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Numéro de Carte</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Montant Remboursé</th>
                     @if (Bouncer::is(auth()->user())->an('admin'))
                         <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Utilisateur</th>
                         <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Action</th>
@@ -34,6 +35,9 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             {{ substr($paiement->carte_premiers_quatre, 0, 4) }} **** **** {{ substr($paiement->carte_derniers_quatre, -4) }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            {{ number_format($paiement->remboursements->sum('montant'), 2) }} €
                         </td>
                         @if (Bouncer::is(auth()->user())->an('admin'))
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">

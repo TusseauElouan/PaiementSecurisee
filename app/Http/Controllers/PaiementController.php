@@ -21,13 +21,15 @@ class PaiementController extends Controller
     public function index()
     {
         if (Bouncer::is(auth()->user())->an('admin')) {
-            $paiements = Paiement::with('user')->get();
+            $paiements = Paiement::with(['user', 'remboursements'])->get(); // Inclure 'remboursements'
         } else {
-            $paiements = auth()->user()->paiements;
+            $paiements = auth()->user()->paiements()->with('remboursements')->get();
         }
 
         return view('paiements.index', compact('paiements'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
