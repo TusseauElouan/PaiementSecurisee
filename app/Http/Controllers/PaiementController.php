@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Silber\Bouncer\BouncerFacade as Bouncer;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+
 class PaiementController extends Controller
 {
     use AuthorizesRequests;

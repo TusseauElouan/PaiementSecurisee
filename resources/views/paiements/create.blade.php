@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="flex justify-center items-center min-h-screen bg-gray-100 px-4">
     <div class="w-full max-w-md p-6 bg-white border border-gray-200 rounded-lg shadow-lg">
@@ -18,7 +17,6 @@
         <form method="POST" action="{{ route('paiements.store') }}">
             @csrf
 
-            <!-- Numéro de carte -->
             <div class="mb-4">
                 <label for="card_number" class="block text-sm font-medium text-gray-700">Numéro de carte</label>
                 <input type="text" name="card_number" id="card_number"
@@ -26,7 +24,6 @@
                        placeholder="1234 5678 9012 3456" maxlength="16" value="{{old('card_number')}}" required>
             </div>
 
-            <!-- Date d'expiration -->
             <div class="mb-4">
                 <label for="card_expiration" class="block text-sm font-medium text-gray-700">Date d'expiration (MM/YY)</label>
                 <input type="text" name="card_expiration" id="card_expiration"
@@ -34,7 +31,6 @@
                        placeholder="MM/YY" maxlength="5" value="{{old('card_expiration')}}" required>
             </div>
 
-            <!-- CVV -->
             <div class="mb-4">
                 <label for="card_cvv" class="block text-sm font-medium text-gray-700">CVV</label>
                 <input type="password" name="card_cvv" id="card_cvv"
@@ -42,7 +38,6 @@
                        placeholder="123" maxlength="3" value="{{old('card_cvv')}}" required>
             </div>
 
-            <!-- Montant -->
             <div class="mb-4">
                 <label for="amount" class="block text-sm font-medium text-gray-700">Montant (€)</label>
                 <input type="number" name="amount" id="amount"
@@ -50,11 +45,11 @@
                        placeholder="0.00" maxlength="15" step="0.01" value="{{old('amount')}}"  required>
             </div>
 
-            <!-- Bouton -->
             <button type="submit" class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 Payer
             </button>
         </form>
     </div>
 </div>
+
 @endsection
