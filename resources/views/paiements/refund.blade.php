@@ -4,7 +4,7 @@
 <div class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8 bg-white shadow rounded-lg">
     <h1 class="text-2xl font-semibold text-gray-800 mb-6">Remboursement</h1>
 
-    <form action="{{ route('paiements.refund.process', $paiement->id) }}" method="POST">
+    <form action="{{ route('paiements.refund.process', $paiement->uuid) }}" method="POST">
         @csrf
         <div class="mb-6">
             <label for="montant" class="block text-sm font-medium text-gray-700 mb-2">Montant à rembourser</label>

@@ -7,6 +7,7 @@ use App\Models\Remboursement;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
 use Silber\Bouncer\BouncerFacade as Bouncer;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -61,6 +62,7 @@ class PaiementController extends Controller
         $card_number = $request->input('card_number');
 
         $encryptedCardNumber = Crypt::encryptString($request->card_number);
+        $encryptedCVV = Crypt::encryptString($request->card_cvv);
 
         $paiement = new Paiement();
         $paiement->user_id = auth()->id();
@@ -70,6 +72,8 @@ class PaiementController extends Controller
         $paiement->carte_derniers_quatre = substr($card_number, -4,);
         $paiement->carte_chiffree = $encryptedCardNumber;
         $paiement->transaction_id = 'txn_' . uniqid();
+        $paiement->uuid = Str::uuid()->toString();
+        $paiement->csv = $encryptedCVV;
         $paiement->save();
 
         return redirect()->route('paiements.index')->with('message', 'Paiement ajouté avec succès.');
@@ -107,9 +111,9 @@ class PaiementController extends Controller
         //
     }
 
-    public function refundForm($id)
+    public function refundForm($uuid)
     {
-        $paiement = Paiement::findOrFail($id);
+        $paiement = Paiement::where('uuid', $uuid)->firstOrFail();
         $this->authorize('refund');
         $montantRestant = $paiement->montantRestant();
         return view('paiements.refund', compact('paiement', 'montantRestant'));
